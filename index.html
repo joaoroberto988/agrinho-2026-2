@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrinho 2026 | Agro Forte • Futuro Sustentável</title>
+    <style>
+        :root {
+            --verde-profundo: #0a1f14;
+            --verde-escuro: #122e1f;
+            --verde-medio: #1b4332;
+            --verde-vivo: #2d6a3f;
+            --verde-claro: #40916c;
+            --verde-limao: #52b788;
+            --verde-neon: #6ee7b7;
+            --dourado: #c8943e;
+            --dourado-brilho: #e8b85c;
+            --dourado-claro: #f5d78c;
+            --terra: #8b5a2b;
+            --terra-clara: #c68c53;
+            --branco: #fefefe;
+            --cinza-fundo: #f0f2f0;
+            --vidro: rgba(255, 255, 255, 0.08);
+            --vidro-borda: rgba(255, 255, 255, 0.18);
+            --sombra-card: 0 8px 40px rgba(0, 0, 0, 0.15);
+            --sombra-elevada: 0 20px 60px rgba(0, 0, 0, 0.25);
+            --borda-radius: 24px;
+            --borda-radius-sm: 16px;
+            --transicao-suave: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transicao-elastica: 0.6s cubic-bezier(0.68, -0.3, 0.27, 1.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--verde-vivo) var(--verde-profundo);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--verde-profundo);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--verde-vivo);
+            border-radius: 10px;
+        }
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--cinza-fundo);
+            color: #1a1a1a;
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            counter-reset: estatistica;
+        }
+
+        /* ============ CURSOR PERSONALIZADO ============ */
+        #cursor-custom {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--dourado);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            display: none;
+        }
+        #cursor-dot {
+            position: fixed;
+            width: 7px;
+            height: 7px;
+            background: var(--dourado-brilho);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            display: none;
+            box-shadow: 0 0 18px var(--dourado-brilho);
+        }
+        @media (pointer: fine) {
+            #cursor-custom,
+            #cursor-dot {
+                display: block;
+            }
+            body {
+                cursor: none;
+            }
+            a,
+            button,
+            .btn,
+            .card-3d,
+            .interativo {
+                cursor: none;
+            }
+            a:hover~#cursor-custom,
+            button:hover~#cursor-custom,
+            .btn:hover~#cursor-custom,
+            .interativo:hover~#cursor-custom {
+                width: 50px;
+                height: 50px;
+                background: rgba(200, 148, 62, 0.2);
+                border-color: var(--dourado-brilho);
+            }
+        }
+
+        /* ============ PRELOADER ============ */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--verde-profundo);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s, visibility 0.6s;
+        }
+        #preloader.oculto {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-anel {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--dourado);
+            border-right-color: var(--verde-limao);
+            animation: girar-loader 1s linear infinite;
+            position: absolute;
+        }
+        .loader-anel:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            animation-direction: reverse;
+            animation-duration: 1.5s;
+        }
+        .loader-anel:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            animation-duration: 0.7s;
+        }
+        @keyframes girar-loader {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .loader-texto {
+            color: var(--dourado-claro);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            animation: pulsar-texto 1.2s ease-in-out infinite;
+            margin-top: 110px;
+            text-transform: uppercase;
+        }
+        @keyframes pulsar-texto {
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at 30% 20%, #1b4332 0%, #0a1f14 60%, #050f0a 100%);
+            overflow: hidden;
+            isolation: isolate;
+        }
+        /* Canvas para partículas */
+        #canvas-particulas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 30%, transparent 70%);
+        }
+        .hero-brilho {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.35;
+            z-index: 0;
+            pointer-events: none;
+            animation: flutuar-brilho 8s ease-in-out infinite;
+        }
+        .hero-brilho.verde {
+            background: var(--verde-vivo);
+            top: -20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        .hero-brilho.dourado {
+            background: var(--dourado);
+            bottom: -25%;
+            right: -15%;
+            animation-delay: -4s;
+            opacity: 0.25;
+        }
+        @keyframes flutuar-brilho {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(40px, -30px) scale(1.15);
+            }
+            66% {
+                transform: translate(-30px, 20px) scale(0.9);
+            }
+        }
+        .hero-conteudo {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            max-width: 950px;
+        }
+        .hero-selo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--vidro);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--vidro-borda);
+            color: var(--dourado-claro);
+            padding: 0.55rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: flutuar-cima-baixo 3s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .hero-selo .ponto-pulsante {
+            width: 10px;
+            height: 10px;
+            background: #6ee7b7;
+            border-radius: 50%;
+            animation: pulsar-ponto 1.5s ease-in-out infinite;
+            box-shadow: 0 0 16px #6ee7b7;
+        }
+        @keyframes pulsar-ponto {
+            0%,
+            100% {
+                box-shadow: 0 0 8px #6ee7b7;
+            }
+            50% {
+                box-shadow: 0 0 28px #6ee7b7, 0 0 50px #52b788;
+            }
+        }
+        @keyframes flutuar-cima-baixo {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 6rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 4px 60px rgba(0, 0, 0, 0.6);
+        }
+        .hero h1 .gradiente-texto {
+            background: linear-gradient(135deg, #f5d78c 0%, #e8b85c 25%, #c8943e 50%, #e8b85c 75%, #f5d78c 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradiente-movimento 4s ease-in-out infinite;
+            display: inline;
+        }
+        @keyframes gradiente-movimento {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        .hero-subtitulo {
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        .hero-botoes {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transicao-elastica);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            z-index: -1;
+            transition: var(--transicao-suave);
+        }
+        .btn-primario {
+            background: linear-gradient(135deg, #c8943e, #e8b85c);
+            color: #1a1a1a;
+            box-shadow: 0 8px 30px rgba(200, 148, 62, 0.45);
+            font-weight: 800;
+        }
+        .btn-primario:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 18px 45px rgba(200, 148, 62, 0.6);
+        }
+        .btn-secundario {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .btn-secundario:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #fff;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.1);
+        }
+        .btn-icone {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .btn:hover .btn-icone {
+            transform: translateX(4px) rotate(10deg);
+        }
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            animation: flutuar-cima-baixo 2s ease-in-out infinite;
+        }
+        .hero-scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+        .hero-scroll-indicator .seta-baixo {
+            width: 28px;
+            height: 28px;
+            border-right: 2px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            transform: rotate(45deg);
+            animation: seta-pular 1.5s ease-in-out infinite;
+        }
+        @keyframes seta-pular {
+            0%,
+            100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(10px);
+            }
+        }
+
+        /* Ondas SVG */
+        .ondas-container {
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            pointer-events: none;
+            line-height: 0;
+        }
+        .ondas-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ============ NAVEGAÇÃO ============ */
+        .nav-principal {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 31, 20, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s;
+        }
+        .nav-principal.reduzida {
+            background: rgba(5, 15, 10, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .nav-logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-logo .icone-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--verde-limao), var(--dourado));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 16px rgba(82, 183, 136, 0.4);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 30px;
+            transition: var(--transicao-suave);
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.ativo {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .nav-links a.ativo {
+            background: rgba(200, 148, 62, 0.2);
+            color: var(--dourado-brilho);
+        }
+
+        /* ============ SEÇÕES ============ */
+        .secao {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        .secao-titulo {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .secao-titulo .tag {
+            display: inline-block;
+            background: rgba(45, 106, 63, 0.12);
+            color: var(--verde-vivo);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        .secao-titulo h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--verde-profundo);
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        .secao-titulo .linha-decorativa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem auto 1.5rem;
+        }
+        .secao-titulo .linha-decorativa span {
+            display: block;
+            height: 3px;
+            border-radius: 5px;
+        }
+        .linha-esquerda {
+            width: 60px;
+            background: var(--verde-claro);
+        }
+        .linha-centro {
+            width: 14px;
+            height: 14px !important;
+            background: var(--dourado);
+            border-radius: 50% !important;
+            box-shadow: 0 0 16px rgba(200, 148, 62, 0.5);
+            animation: pulsar-ponto 2s ease-in-out infinite;
+        }
+        .linha-direita {
+            width: 60px;
+            background: var(--dourado);
+        }
+        .secao-titulo .descricao-titulo {
+            color: #555;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ============ CARDS 3D COM TILT ============ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+        .card-3d {
+            perspective: 800px;
+            height: 380px;
+        }
+        .card-3d-inner {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: var(--borda-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--sombra-card);
+            transition: var(--transicao-suave);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            will-change: transform;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .card-3d-inner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(110, 231, 183, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+            transition: var(--transicao-suave);
+            opacity: 0;
+        }
+        .card-3d-inner:hover::after {
+            opacity: 1;
+        }
+        .card-3d-inner .card-icone-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, rgba(45, 106, 63, 0.1), rgba(200, 148, 62, 0.1));
+            transition: var(--transicao-elastica);
+            margin-bottom: 0.5rem;
+        }
+        .card-3d-inner:hover .card-icone-wrapper {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        .card-3d-inner h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--verde-escuro);
+        }
+        .card-3d-inner p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .card-3d-inner .card-tag {
+            display: inline-block;
+            background: rgba(45, 106, 63, 0.08);
+            color: var(--verde-vivo);
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ============ CONTADORES ANIMADOS ============ */
+        .secao-estatisticas {
+            background: linear-gradient(170deg, #f5f9f5 0%, #eef5ee 30%, #fdfaf3 100%);
+            border-radius: 50px;
+            margin: 2rem auto;
+            max-width: 1150px;
+            padding: 4.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .secao-estatisticas::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 2px dashed rgba(45, 106, 63, 0.15);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+            animation: girar-lento 30s linear infinite;
+        }
+        @keyframes girar-lento {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .estatisticas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .estatistica-item {
+            padding: 1.5rem;
+        }
+        .estatistica-icone {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .estatistica-numero {
+            font-size: 3.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-claro));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: block;
+            letter-spacing: -2px;
+        }
+        .estatistica-numero.dourado {
+            background: linear-gradient(135deg, #b8860b, var(--dourado-brilho), #b8860b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .estatistica-label {
+            font-weight: 700;
+            color: var(--verde-escuro);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* ============ BALANÇA INTERATIVA ============ */
+        .balanca-container {
+            display: flex;
+            align-items: stretch;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .balanca-prato {
+            flex: 1;
+            min-width: 280px;
+            max-width: 420px;
+            background: #fff;
+            border-radius: var(--borda-radius);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--sombra-card);
+            transition: var(--transicao-elastica);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        .balanca-prato.producao:hover {
+            border-color: var(--terra);
+            box-shadow: 0 20px 50px rgba(139, 90, 43, 0.2);
+            transform: translateY(-8px);
+        }
+        .balanca-prato.ambiente:hover {
+            border-color: var(--verde-claro);
+            box-shadow: 0 20px 50px rgba(45, 106, 63, 0.2);
+            transform: translateY(-8px);
+        }
+        .balanca-prato .prato-icone {
+            font-size: 4.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transicao-elastica);
+        }
+        .balanca-prato:hover .prato-icone {
+            transform: scale(1.15);
+        }
+        .balanca-prato h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--verde-profundo);
+        }
+        .balanca-prato ul {
+            list-style: none;
+            text-align: left;
+            padding: 0;
+        }
+        .balanca-prato ul li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eee;
+            color: #444;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .balanca-prato ul li .check {
+            color: var(--verde-claro);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .balanca-centro {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            animation: balancar-suave 3s ease-in-out infinite;
+            color: var(--dourado);
+            text-shadow: 0 0 30px rgba(200, 148, 62, 0.5);
+            min-width: 60px;
+        }
+        @keyframes balancar-suave {
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+            20% {
+                transform: rotate(8deg);
+            }
+            40% {
+                transform: rotate(-6deg);
+            }
+            60% {
+                transform: rotate(4deg);
+            }
+            80% {
+                transform: rotate(-2deg);
+            }
+        }
+
+        /* ============ TIMELINE AVANÇADA ============ */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--verde-claro), var(--dourado), var(--verde-claro), var(--dourado));
+            border-radius: 5px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 85px;
+            margin-bottom: 2.8rem;
+            transition: var(--transicao-suave);
+        }
+        .timeline-item:hover {
+            transform: translateX(8px);
+        }
+        .timeline-item .ponto-timeline {
+            position: absolute;
+            left: 26px;
+            top: 6px;
+            width: 33px;
+            height: 33px;
+            background: #fff;
+            border: 5px solid var(--verde-claro);
+            border-radius: 50%;
+            z-index: 1;
+            transition: var(--transicao-elastica);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        .timeline-item:hover .ponto-timeline {
+            background: var(--verde-claro);
+            border-color: var(--verde-limao);
+            box-shadow: 0 0 0 16px rgba(45, 106, 63, 0.2);
+        }
+        .timeline-item .ano {
+            font-weight: 900;
+            color: var(--dourado);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+        .timeline-item h4 {
+            font-weight: 800;
+            color: var(--verde-escuro);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* ============ SLIDER DE PROJETOS ============ */
+        .slider-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra-elevada);
+        }
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .slider-slide {
+            min-width: 100%;
+            padding: 3rem 2.5rem;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .slider-slide .slide-emoji {
+            font-size: 5rem;
+            flex-shrink: 0;
+        }
+        .slider-slide h3 {
+            font-weight: 900;
+            color: var(--verde-profundo);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .slider-slide p {
+            color: #555;
+            max-width: 500px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: var(--sombra-card);
+            z-index: 5;
+            transition: var(--transicao-suave);
+            color: var(--verde-escuro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-btn:hover {
+            background: var(--verde-profundo);
+            color: #fff;
+            box-shadow: var(--sombra-elevada);
+        }
+        .slider-btn.prev {
+            left: 15px;
+        }
+        .slider-btn.next {
+            right: 15px;
+        }
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: var(--transicao-suave);
+            border: none;
+        }
+        .slider-dot.ativo {
+            background: var(--verde-vivo);
+            box-shadow: 0 0 14px rgba(45, 106, 63, 0.5);
+            transform: scale(1.3);
+        }
+
+        /* ============ CTA FINAL ============ */
+        .cta-final {
+            text-align: center;
+            background: linear-gradient(160deg, #0a1f14 0%, #122e1f 40%, #1b4332 100%);
+            color: #fff;
+            padding: 5rem 2rem;
+            border-radius: 50px;
+            margin: 3rem auto;
+            max-width: 1150px;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 148, 62, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -30%;
+            right: -20%;
+            z-index: -1;
+            animation: flutuar-brilho 10s ease-in-out infinite;
+        }
+        .cta-final h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        .cta-final p {
+            font-size: 1.15rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto 2.2rem;
+            line-height: 1.7;
+        }
+
+        /* ============ RODAPÉ ============ */
+        .rodape {
+            background: #050f0a;
+            color: rgba(255, 255, 255, 0.65);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .rodape .rodape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            text-align: left;
+        }
+        .rodape h4 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .rodape a {
+            color: var(--dourado-claro);
+            text-decoration: none;
+            transition: var(--transicao-suave);
+        }
+        .rodape a:hover {
+            color: #fff;
+        }
+        .rodape .assinatura {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .rodape .assinatura strong {
+            color: var(--dourado);
+        }
+
+        /* ============ BOTÃO VOLTAR AO TOPO ============ */
+        .btn-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--verde-vivo);
+            color: #fff;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transicao-elastica);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        .btn-topo.visivel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .btn-topo:hover {
+            background: var(--dourado);
+            transform: translateY(-6px) scale(1.1);
+            box-shadow: 0 16px 40px rgba(200, 148, 62, 0.5);
+        }
+
+        /* ============ RESPONSIVIDADE ============ */
+        @media (max-width: 768px) {
+            .nav-inner {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.6rem 1rem;
+            }
+            .nav-links a {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.78rem;
+            }
+            .balanca-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .balanca-centro {
+                transform: rotate(90deg);
+                animation: none;
+                margin: 0.5rem 0;
+            }
+            .timeline::before {
+                left: 25px;
+            }
+            .timeline-item {
+                padding-left: 65px;
+            }
+            .timeline-item .ponto-timeline {
+                left: 11px;
+                width: 28px;
+                height: 28px;
+            }
+            .slider-slide {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+            .card-3d {
+                height: auto;
+                min-height: 340px;
+            }
+            #cursor-custom,
+            #cursor-dot {
+                display: none !important;
+            }
+            body {
+                cursor: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 0.8rem 1.6rem;
+                font-size: 0.85rem;
+            }
+            .secao {
+                padding: 3rem 1rem;
+            }
+            .estatistica-numero {
+                font-size: 2.5rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-final {
+                border-radius: 30px;
+                padding: 3rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-anel"></div>
+        <div class="loader-anel"></div>
+        <div class="loader-anel"></div>
+        <p class="loader-texto">Carregando Sustentabilidade...</p>
+    </div>
+
+    <!-- Cursor personalizado -->
+    <div id="cursor-custom"></div>
+    <div id="cursor-dot"></div>
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero" id="topo">
+        <div class="hero-grid"></div>
+        <div class="hero-brilho verde"></div>
+        <div class="hero-brilho dourado"></div>
+        <canvas id="canvas-particulas"></canvas>
+
+        <div class="hero-conteudo">
+            <div class="hero-selo">
+                <span class="ponto-pulsante"></span> Paraná • Brasil 2026
+            </div>
+            <h1>
+                Agro <span class="gradiente-texto">Forte</span>,<br>
+                Futuro <span class="gradiente-texto">Sustentável</span>
+            </h1>
+            <p class="hero-subtitulo">
+                O <strong>equilíbrio inteligente</strong> entre a produção que alimenta nações
+                e a preservação que garante o amanhã. <em>O Paraná já é referência mundial.</em>
+            </p>
+            <div class="hero-botoes">
+                <a href="#pilares" class="btn btn-primario interativo">
+                    Explorar Projeto <span class="btn-icone">→</span>
+                </a>
+                <a href="#equilibrio" class="btn btn-secundario interativo">
+                    ⚖️ Ver Equilíbrio
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span>Role</span>
+            <div class="seta-baixo"></div>
+        </div>
+
+        <div class="ondas-container">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#f0f2f0" d="M0,40 C240,100 480,0 720,60 C960,120 1200,20 1440,50 L1440,120 L0,120 Z" />
+            </svg>
+        </div>
+    </header>
+
+    <!-- ==================== NAVEGAÇÃO ==================== -->
+    <nav class="nav-principal" id="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <div class="icone-logo">🌱</div>
+                Agrinho<span style="color:var(--dourado);">2026</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#pilares" class="interativo">Pilares</a></li>
+                <li><a href="#equilibrio" class="interativo">Equilíbrio</a></li>
+                <li><a href="#dados" class="interativo">Dados</a></li>
+                <li><a href="#evolucao" class="interativo">Evolução</a></li>
+                <li><a href="#projetos" class="interativo">Cases</a></li>
+                <li><a href="#futuro" class="interativo">Futuro</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== SEÇÃO PILARES (CARDS 3D) ==================== -->
+    <section class="secao" id="pilares">
+        <div class="secao-titulo">
+            <span class="tag">Fundamentos</span>
+            <h2>Os 4 Pilares do Agro Sustentável</h2>
+            <div class="linha-decorativa">
+                <span class="linha-esquerda"></span><span class="linha-centro"></span><span class="linha-direita"></span>
+            </div>
+            <p class="descricao-titulo">Inovação e respeito à natureza caminham lado a lado. Estes são os alicerces do
+                novo agro paranaense.</p>
+        </div>
+        <div class="cards-grid">
+            <!-- Card 1 -->
+            <div class="card-3d interativo" data-tilt>
+                <div class="card-3d-inner">
+                    <div class="card-icone-wrapper">💧</div>
+                    <span class="card-tag">Recursos Hídricos</span>
+                    <h3>Água Inteligente</h3>
+                    <p>Irrigação de precisão e proteção de nascentes reduzem o consumo em até <strong>60%</strong>,
+                        garantindo água para as futuras gerações.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card-3d interativo" data-tilt>
+                <div class="card-3d-inner">
+                    <div class="card-icone-wrapper">🌳</div>
+                    <span class="card-tag">Biodiversidade</span>
+                    <h3>Matas Protegidas</h3>
+                    <p>Respeito integral ao Código Florestal com <strong>corredores ecológicos</strong> que conectam
+                        habitats e preservam a fauna nativa.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card-3d interativo" data-tilt>
+                <div class="card-3d-inner">
+                    <div class="card-icone-wrapper">☀️</div>
+                    <span class="card-tag">Energia Limpa</span>
+                    <h3>Energia Renovável</h3>
+                    <p>Painéis solares, biodigestores e biomassa já respondem por <strong>32%</strong> da matriz
+                        energética rural do Paraná.</p>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card-3d interativo" data-tilt>
+                <div class="card-3d-inner">
+                    <div class="card-icone-wrapper">🔄</div>
+                    <span class="card-tag">Circularidade</span>
+                    <h3>Economia Circular</h3>
+                    <p>Resíduos viram adubo orgânico, dejetos viram biogás. <strong>Nada se perde</strong> — tudo se
+                        transforma em novo valor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SEÇÃO EQUILÍBRIO (BALANÇA) ==================== -->
+    <section class="secao" id="equilibrio">
+        <div class="secao-titulo">
+            <span class="tag">Harmonia</span>
+            <h2>⚖️ O Equilíbrio Que Move o Paraná</h2>
+            <div class="linha-decorativa">
+                <span class="linha-esquerda"></span><span class="linha-centro"></span><span class="linha-direita"></span>
+            </div>
+            <p class="descricao-titulo">Produtividade recorde e preservação ambiental não são opostos — são
+                <strong>aliados estratégicos</strong>.</p>
+        </div>
+        <div class="balanca-container">
+            <div class="balanca-prato producao interativo">
+                <span class="prato-icone">🚜🌽🐄</span>
+                <h3>🏭 Produção Forte</h3>
+                <ul>
+                    <li><span class="check">✓</span> Maior produtor de grãos e proteínas do Brasil</li>
+                    <li><span class="check">✓</span> Agro representa 33% do PIB paranaense</li>
+                    <li><span class="check">✓</span> Tecnologia de precisão em 78% das propriedades</li>
+                    <li><span class="check">✓</span> Geração de 2,5 milhões de empregos diretos</li>
+                    <li><span class="check">✓</span> Exportações para mais de 180 países</li>
+                </ul>
+            </div>
+            <div class="balanca-centro">⚖️</div>
+            <div class="balanca-prato ambiente interativo">
+                <span class="prato-icone">🌳💚🦜</span>
+                <h3>🌿 Meio Ambiente Protegido</h3>
+                <ul>
+                    <li><span class="check">✓</span> 14% do território em Unidades de Conservação</li>
+                    <li><span class="check">✓</span> Redução de 47% no desmatamento ilegal</li>
+                    <li><span class="check">✓</span> Mais de 35 mil nascentes protegidas</li>
+                    <li><span class="check">✓</span> Corredores de biodiversidade interligados</li>
+                    <li><span class="check">✓</span> Monitoramento por satélite em tempo real</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SEÇÃO ESTATÍSTICAS COM CONTADORES ==================== -->
+    <section class="secao-estatisticas" id="dados">
+        <div class="secao-titulo">
+            <span class="tag">Números</span>
+            <h2>📊 O Agro Paranaense em Dados</h2>
+            <div class="linha-decorativa">
+                <span class="linha-esquerda"></span><span class="linha-centro"></span><span class="linha-direita"></span>
+            </div>
+            <p class="descricao-titulo">Resultados que comprovam: <strong>sustentabilidade e lucratividade</strong> andam
+                juntas.</p>
+        </div>
+        <div class="estatisticas-grid">
+            <div class="estatistica-item">
+                <span class="estatistica-icone">📈</span>
+                <span class="estatistica-numero" data-alvo="43" data-sufixo="%">0%</span>
+                <span class="estatistica-label">Aumento de produtividade<br>com práticas sustentáveis</span>
+            </div>
+            <div class="estatistica-item">
+                <span class="estatistica-icone">🌿</span>
+                <span class="estatistica-numero dourado" data-alvo="98" data-sufixo="%">0%</span>
+                <span class="estatistica-label">Propriedades com<br>Reserva Legal preservada</span>
+            </div>
+            <div class="estatistica-item">
+                <span class="estatistica-icone">🌍</span>
+                <span class="estatistica-numero" data-alvo="1.4" data-sufixo="M ha" data-decimal="true">0</span>
+                <span class="estatistica-label">Hectares de mata nativa<br>em áreas privadas</span>
+            </div>
+            <div class="estatistica-item">
+                <span class="estatistica-icone">⬇️</span>
+                <span class="estatistica-numero dourado" data-alvo="39" data-sufixo="%">0%</span>
+                <span class="estatistica-label">Redução de emissões de CO₂<br>na última década</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SEÇÃO EVOLUÇÃO (TIMELINE) ==================== -->
+    <section class="secao" id="evolucao">
+        <div class="secao-titulo">
+            <span class="tag">História</span>
+            <h2>🕰️ A Evolução Sustentável no Campo</h2>
+            <div class="linha-decorativa">
+                <span class="linha-esquerda"></span><span class="linha-centro"></span><span class="linha-direita"></span>
+            </div>
+            <p class="descricao-titulo">Cada etapa dessa jornada representa um avanço rumo ao <strong>equilíbrio
+                    perfeito</strong>.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item interativo">
+                <div class="ponto-timeline"></div>
+                <span class="ano">1990</span>
+                <h4>🌱 Revolução do Plantio Direto</h4>
+                <p>O Paraná foi pioneiro mundial. A técnica evita erosão, sequestra carbono e mantém a umidade do solo —
+                    uma verdadeira revolução silenciosa.</p>
+            </div>
+            <div class="timeline-item interativo">
+                <div class="ponto-timeline"></div>
+                <span class="ano">2005</span>
+                <h4>💧 Proteção de Nascentes</h4>
+                <p>Programa estadual que já protegeu mais de <strong>35 mil nascentes</strong> com cercamento e
+                    reflorestamento, garantindo segurança hídrica.</p>
+            </div>
+            <div class="timeline-item interativo">
+                <div class="ponto-timeline"></div>
+                <span class="ano">2015</span>
+                <h4>☀️ Energia Solar no Campo</h4>
+                <p>Produtores investem em placas fotovoltaicas. Hoje, <strong>32% da energia rural</strong> vem de fontes
+                    renováveis próprias.</p>
+            </div>
+            <div class="timeline-item interativo">
+                <div class="ponto-timeline"></div>
+                <span class="ano">2023</span>
+                <h4>🤖 Agricultura 5.0</h4>
+                <p>Drones, sensores IoT e IA otimizam o uso de insumos, reduzindo desperdícios e monitorando a saúde das
+                    lavouras em tempo real.</p>
+            </div>
+            <div class="timeline-item interativo">
+                <div class="ponto-timeline"></div>
+                <span class="ano">2026</span>
+                <h4>🚀 O Futuro É Hoje</h4>
+                <p>Integração total: produção de alimentos, energia limpa, conservação da biodiversidade e
+                    desenvolvimento social — tudo em perfeita harmonia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDER DE CASES/PROJETOS ==================== -->
+    <section class="secao" id="projetos">
+        <div class="secao-titulo">
+            <span class="tag">Cases Reais</span>
+            <h2>🏆 Projetos Que Inspiram</h2>
+            <div class="linha-decorativa">
+                <span class="linha-esquerda"></span><span class="linha-centro"></span><span class="linha-direita"></span>
+            </div>
+            <p class="descricao-titulo">Conheça iniciativas paranaenses que já estão <strong>transformando o
+                    campo</strong>.</p>
+        </div>
+        <div class="slider-container" id="slider">
+            <div class="slider-track" id="sliderTrack">
+                <div class="slider-slide">
+                    <span class="slide-emoji">🐝🌻</span>
+                    <div>
+                        <h3>Projeto Polinizadores do Futuro</h3>
+                        <p>Agricultores familiares de Toledo-PR criaram corredores de flores nativas entre lavouras,
+                            aumentando a polinização em <strong>65%</strong> e reduzindo o uso de agrotóxicos.</p>
+                    </div>
+                </div>
+                <div class="slider-slide">
+                    <span class="slide-emoji">☀️🔋</span>
+                    <div>
+                        <h3>Cooperativa Solar Rural</h3>
+                        <p>Em Cascavel, 120 propriedades compartilham energia solar excedente via cooperativa, reduzindo
+                            custos em <strong>40%</strong> e zerando emissões de carbono na operação.</p>
+                    </div>
+                </div>
+                <div class="slider-slide">
+                    <span class="slide-emoji">💧🌿</span>
+                    <div>
+                        <h3>Guardiões das Nascentes</h3>
+                        <p>Jovens de Guarapuava monitoram 200 nascentes com aplicativo próprio, reportando qualidade da
+                            água e reflorestando áreas degradadas com <strong>50 mil árvores</strong> plantadas.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-btn prev interativo" id="btnPrev">◀</button>
+            <button class="slider-btn next interativo" id="btnNext">▶</button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <!-- ==================== CTA FINAL ==================== -->
+    <section class="cta-final" id="futuro">
+        <h2>🌎 O Futuro Sustentável Começa Agora</h2>
+        <p>
+            Cada decisão no campo ecoa no planeta. O Paraná prova que
+            <strong style="color:#f5d78c;">produzir e preservar</strong> não são escolhas opostas —
+            são o mesmo caminho. <em>Faça parte desta transformação!</em>
+        </p>
+        <a href="#topo" class="btn btn-primario interativo" style="background:#fff;color:#0a1f14;box-shadow:0 8px 30px rgba(255,255,255,0.25);">
+            🌟 Participar do Agrinho 2026 <span class="btn-icone">↑</span>
+        </a>
+    </section>
+
+    <!-- ==================== RODAPÉ ==================== -->
+    <footer class="rodape">
+        <div class="rodape-grid">
+            <div>
+                <h4>🌱 Agrinho 2026</h4>
+                <p>Programa de responsabilidade<br>socioambiental do Paraná.</p>
+            </div>
+            <div>
+                <h4>🔗 Links</h4>
+                <p><a href="#pilares" class="interativo">Pilares</a></p>
+                <p><a href="#dados" class="interativo">Dados</a></p>
+                <p><a href="#projetos" class="interativo">Cases</a></p>
+            </div>
+            <div>
+                <h4>📧 Contato</h4>
+                <p>agrinho@parana.pr.gov.br</p>
+                <p>Curitiba • Paraná • Brasil</p>
+            </div>
+        </div>
+        <div class="assinatura">
+            <p>
+                🌍 <strong>Programa Agrinho 2026</strong> — Tema:
+                <strong>"Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</strong><br>
+                Projeto desenvolvido com 💚 para um planeta melhor • © 2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button class="btn-topo interativo" id="btnTopo" title="Voltar ao topo">↑</button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // ========== PRELOADER ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('oculto');
+                document.body.style.overflow = '';
+            }, 1200);
+        });
+        document.body.style.overflow = 'hidden';
+
+        // ========== CURSOR CUSTOMIZADO ==========
+        const cursorCustom = document.getElementById('cursor-custom');
+        const cursorDot = document.getElementById('cursor-dot');
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorCustom.style.left = e.clientX + 'px';
+                cursorCustom.style.top = e.clientY + 'px';
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+        }
+
+        // ========== CANVAS DE PARTÍCULAS ==========
+        const canvas = document.getElementById('canvas-particulas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particulas = [];
+            const maxParticulas = 70;
+
+            function redimensionarCanvas() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            }
+            redimensionarCanvas();
+            window.addEventListener('resize', redimensionarCanvas);
+
+            class Particula {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height + Math.random() * 200;
+                    this.tamanho = Math.random() * 4 + 1.5;
+                    this.velocidadeY = -(Math.random() * 1.2 + 0.4);
+                    this.velocidadeX = (Math.random() - 0.5) * 0.6;
+                    this.opacidade = Math.random() * 0.7 + 0.15;
+                    this.tipo = Math.random() > 0.5 ? 'folha' : 'luz';
+                }
+                atualizar() {
+                    this.y += this.velocidadeY;
+                    this.x += this.velocidadeX + Math.sin(this.y * 0.01) * 0.3;
+                    if (this.y < -60 || this.x < -60 || this.x > canvas.width + 60) {
+                        this.reset();
+                        this.y = canvas.height + Math.random() * 100;
+                    }
+                }
+                desenhar() {
+                    ctx.save();
+                    ctx.globalAlpha = this.opacidade;
+                    if (this.tipo === 'folha') {
+                        ctx.fillStyle = '#52b788';
+                        ctx.beginPath();
+                        ctx.ellipse(this.x, this.y, this.tamanho, this.tamanho * 1.6, Math.random() * 0.5, 0, Math.PI *
+                            2);
+                        ctx.fill();
+                    } else {
+                        ctx.fillStyle = '#f5d78c';
+                        ctx.shadowColor = '#f5d78c';
+                        ctx.shadowBlur = 8;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.tamanho * 0.7, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+            }
+
+            for (let i = 0; i < maxParticulas; i++) {
+                const p = new Particula();
+                p.y = Math.random() * canvas.height;
+                particulas.push(p);
+            }
+
+            function animarCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particulas.forEach(p => {
+                    p.atualizar();
+                    p.desenhar();
+                });
+                requestAnimationFrame(animarCanvas);
+            }
+            animarCanvas();
+        }
+
+        // ========== EFEITO TILT 3D NOS CARDS ==========
+        document.querySelectorAll('[data-tilt]').forEach(card => {
+            const inner = card.querySelector('.card-3d-inner');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centroX = rect.width / 2;
+                const centroY = rect.height / 2;
+                const rotacaoY = ((x - centroX) / centroX) * 12;
+                const rotacaoX = -((y - centroY) / centroY) * 12;
+                inner.style.transform =
+                    `perspective(800px) rotateX(${rotacaoX}deg) rotateY(${rotacaoY}deg) scale(1.03)`;
+                inner.style.boxShadow = `0 25px 55px rgba(0,0,0,0.2), ${rotacaoY}px ${rotacaoX}px 30px rgba(0,0,0,0.1)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                inner.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+                inner.style.boxShadow = '0 8px 40px rgba(0,0,0,0.15)';
+            });
+        });
+
+        // ========== CONTADORES ANIMADOS ==========
+        function animarContadores() {
+            document.querySelectorAll('.estatistica-numero[data-alvo]').forEach(el => {
+                if (el.dataset.animado === 'true') return;
+                el.dataset.animado = 'true';
+                const alvo = parseFloat(el.dataset.alvo);
+                const sufixo = el.dataset.sufixo || '';
+                const decimal = el.dataset.decimal === 'true';
+                const duracao = 2200;
+                const inicio = performance.now();
+                const valorInicial = 0;
+
+                function atualizar(timestamp) {
+                    const progresso = Math.min((timestamp - inicio) / duracao, 1);
+                    const ease = 1 - Math.pow(1 - progresso, 3);
+                    let valorAtual = valorInicial + (alvo - valorInicial) * ease;
+                    if (decimal) {
+                        el.textContent = valorAtual.toFixed(1) + ' ' + sufixo;
+                    } else {
+                        el.textContent = Math.round(valorAtual) + sufixo;
+                    }
+                    if (progresso < 1) {
+                        requestAnimationFrame(atualizar);
+                    } else {
+                        el.textContent = (decimal ? alvo.toFixed(1) : alvo) + (sufixo ? ' ' + sufixo : sufixo);
+                    }
+                }
+                requestAnimationFrame(atualizar);
+            });
+        }
+
+        const observadorContadores = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animarContadores();
+                    observadorContadores.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        const secaoEstatisticas = document.querySelector('.secao-estatisticas');
+        if (secaoEstatisticas) observadorContadores.observe(secaoEstatisticas);
+
+        // ========== SLIDER ==========
+        const sliderTrack = document.getElementById('sliderTrack');
+        const slides = document.querySelectorAll('.slider-slide');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const dotsContainer = document.getElementById('sliderDots');
+        let slideAtual = 0;
+        const totalSlides = slides.length;
+
+        // Criar dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('slider-dot');
+            if (i === 0) dot.classList.add('ativo');
+            dot.addEventListener('click', () => irParaSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function irParaSlide(index) {
+            slideAtual = index;
+            sliderTrack.style.transform = `translateX(-${slideAtual * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('ativo', i === slideAtual));
+        }
+
+        btnPrev.addEventListener('click', () => {
+            slideAtual = (slideAtual - 1 + totalSlides) % totalSlides;
+            irParaSlide(slideAtual);
+        });
+        btnNext.addEventListener('click', () => {
+            slideAtual = (slideAtual + 1) % totalSlides;
+            irParaSlide(slideAtual);
+        });
+
+        // Auto-slide
+        let autoSlide = setInterval(() => {
+            slideAtual = (slideAtual + 1) % totalSlides;
+            irParaSlide(slideAtual);
+        }, 5000);
+        const sliderContainer = document.getElementById('slider');
+        sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        sliderContainer.addEventListener('mouseleave', () => {
+            autoSlide = setInterval(() => {
+                slideAtual = (slideAtual + 1) % totalSlides;
+                irParaSlide(slideAtual);
+            }, 5000);
+        });
+
+        // ========== NAVEGAÇÃO STICKY ==========
+        const nav = document.getElementById('nav');
+        let ultimoScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollAtual = window.scrollY;
+            if (scrollAtual > 150) {
+                nav.classList.add('reduzida');
+            } else {
+                nav.classList.remove('reduzida');
+            }
+            // Destacar link ativo
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const secao = document.querySelector(link.getAttribute('href'));
+                if (secao) {
+                    const rect = secao.getBoundingClientRect();
+                    if (rect.top <= 120 && rect.bottom >= 120) {
+                        link.classList.add('ativo');
+                    } else {
+                        link.classList.remove('ativo');
+                    }
+                }
+            });
+            ultimoScroll = scrollAtual;
+        });
+
+        // ========== BOTÃO VOLTAR AO TOPO ==========
+        const btnTopo = document.getElementById('btnTopo');
+        window.addEventListener('scroll', () => {
+            btnTopo.classList.toggle('visivel', window.scrollY > 600);
+        });
+        btnTopo.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ========== SCROLL REVEAL GERAL ==========
+        const revelarObservador = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll(
+            '.card-3d, .balanca-prato, .timeline-item, .estatistica-item, .slider-slide, .cta-final, .secao-titulo'
+            ).forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            revelarObservador.observe(el);
+        });
+
+        // Revelar imediatamente os já visíveis
+        setTimeout(() => {
+            document.querySelectorAll(
+                '.card-3d, .balanca-prato, .timeline-item, .estatistica-item, .slider-slide, .cta-final, .secao-titulo'
+                ).forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }, 300);
+
+        console.log('🌱 Agrinho 2026 — Projeto carregado com sucesso!');
+        console.log('🏆 Tema: Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente');
+        console.log('💚 Desenvolvido com excelência para vencer!');
+    </script>
+</body>
+</html>
